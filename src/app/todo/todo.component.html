@@ -1,0 +1,31 @@
+<form  #todoform="ngForm" (ngSubmit)="saveTodo(todoform)">
+    <div class="form-group">
+      <label>Description</label>
+      <input type="text" name="description" required="required" minlength="5" 
+      #description="ngModel" class="form-control" placeholder="Enter Description" 
+      [(ngModel)]="todo.description" [ngClass]="{'form-control':true,'is-invalid':(description.touched && description.invalid),'is-valid': description.touched && description.valid}">
+      <small class="form-text text-danger" *ngIf="description.touched && description.errors?.['required']"><p>Required Field</p></small>
+      <small class="form-text text-danger" *ngIf="description.touched && description.errors?.['minlength']"><p>Required Minimum 5 Characters</p></small>  
+    </div>
+    
+    <div class="form-group">
+      <label>targetDate</label>
+      <input type="date"  name="targetDate" 
+        appTargetDateValidator #targetDate="ngModel" [ngClass]="{'form-control':true, 
+      'is-invalid':targetDate.touched && targetDate.invalid,
+      'is-valid':targetDate.touched && targetDate.valid}"
+      [ngModel]="todo.targetDate|date:'yyyy-MM-dd'" (ngModelChange)="todo.targetDate= $event">
+      <small class="form-text text-danger" *ngIf="targetDate.touched && targetDate.errors?.['required']"><p>{{targetDate.errors?.['errMsg']}}</p></small>
+      <small class="form-text text-danger" *ngIf="targetDate.touched && targetDate.errors?.['invalidTargetDate']"><p>{{targetDate.errors?.['errMsg']}}</p></small>
+    </div>
+    <div class="form-group">
+        <label>Completed</label>
+        <select [(ngModel)]="todo.completed" class="form-control" name="completed">
+          <option *ngFor="let val of completed" [ngValue]="val.value">{{val.title}}</option>
+        </select>
+       <!-- <input type="text" name="completed" required="required" #completed="ngModel" class="form-control" placeholder="Enter true/false" [(ngModel)]="todo.completed">
+      -->
+      </div>
+
+    <button type="submit" [disabled]="todoform.invalid" class="btn btn-primary" >Submit</button>
+  </form>

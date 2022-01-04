@@ -1,0 +1,39 @@
+<div ng-app="myApp" ng-controller="myController" class="container">
+    <form name="myForm" #loginform="ngForm">
+      <div class="login-container">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="form-group">
+              <label>Username</label>
+              <input type="text" name="username" [(ngModel)]="username" #name="ngModel" required 
+              [ngClass]="{'form-control':true,'is-invalid':name.touched && name.invalid,
+              'is-valid':name.touched && name.valid}">
+              <small class="form-text text-danger" *ngIf="name.touched && name.invalid"><p>Required Field</p></small>
+            </div>
+          </div>
+          <div class="col-md-12">
+            <div class="form-group">
+              <label>Password</label>
+              <input type="password" name="pass" [(ngModel)]="password" #pwd="ngModel" required 
+              [ngClass]="{'form-control':true, 'is-invalid':pwd.touched && pwd.invalid,
+              'is-valid':pwd.touched && pwd.valid}">
+              <small class="form-text text-danger" *ngIf="pwd.touched && pwd.invalid"><p>Required Field</p></small>
+            </div>
+          </div>
+          <div class="col-md-12"></div>
+          <div class="col-md-12">
+            <div class="form-group">
+              <button [disabled]="loginform.invalid" (click)="jwtAuthenticate()" class="btn btn-success float-right">Login</button>
+              <div class="clearfix"></div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <div *ngIf="showError" class="alert alert-danger">Wrong credentials!</div>
+            <div *ngIf="showSuccess" class="alert alert-success">Login Successful!</div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
