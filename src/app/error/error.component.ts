@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { JwtAuthenticationService } from '../services/jwtauth/jwt-authentication.service';
 import { SessionAuthenticationService } from '../services/session-authentication.service';
 
 @Component({
@@ -8,13 +9,13 @@ import { SessionAuthenticationService } from '../services/session-authentication
   styleUrls: ['./error.component.css']
 })
 export class ErrorComponent implements OnInit {
-username='rishi';
-  constructor(private sessionAuthentication: SessionAuthenticationService,private router:Router) { }
+username=this.jwtAuthenticationService.getLoggedInUsername();
+  constructor(private jwtAuthenticationService: JwtAuthenticationService,private router:Router) { }
 
   ngOnInit(): void {
   }
 takeMeHome(){
-if(this.sessionAuthentication.isUserLoggedIn()){
+if(this.jwtAuthenticationService.isUserLoggedIn()){
   this.router.navigate(['welcome', this.username]);
 }
 else

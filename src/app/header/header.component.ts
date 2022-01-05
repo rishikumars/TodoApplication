@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { JwtAuthenticationService } from '../services/jwtauth/jwt-authentication.service';
 import { SessionAuthenticationService } from '../services/session-authentication.service';
 @Component({
   selector: 'app-header',
@@ -8,7 +9,7 @@ import { SessionAuthenticationService } from '../services/session-authentication
 })
 export class HeaderComponent implements OnInit {
 //username=this.sessionAuthenticationService.getLoggedInUsername();
-  constructor(public sessionAuthenticationService: SessionAuthenticationService,private router:Router) { }
+  constructor(public jwtAuthenticationService: JwtAuthenticationService,private router:Router) { }
 
   ngOnInit(): void {
 }

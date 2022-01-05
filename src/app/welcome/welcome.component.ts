@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { JwtAuthenticationService } from '../services/jwtauth/jwt-authentication.service';
 import { SessionAuthenticationService } from '../services/session-authentication.service';
 
 @Component({
@@ -8,8 +9,8 @@ import { SessionAuthenticationService } from '../services/session-authentication
   styleUrls: ['./welcome.component.css']
 })
 export class WelcomeComponent implements OnInit {
-username=this.sessionAuthenticationService.getLoggedInUsername();
-  constructor(private activatedRoute:ActivatedRoute,private sessionAuthenticationService:SessionAuthenticationService) { }
+username=this.jwtAuthService.getLoggedInUsername();
+  constructor(private activatedRoute:ActivatedRoute,private jwtAuthService:JwtAuthenticationService) { }
 
   ngOnInit(): void {
    // this.username=this.activatedRoute.snapshot.params['name'];

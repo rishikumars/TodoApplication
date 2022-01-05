@@ -11,7 +11,6 @@ import { SessionAuthenticationService } from '../services/session-authentication
 })
 export class LoginComponent implements OnInit {
 showError=false;
-showSuccess=false;
 username: string='';
 password: string='';
 response:Object | undefined;
@@ -28,7 +27,6 @@ authenticate(){
     this.router.navigate(['welcome',this.username]);
   }
   else{
-    this.showSuccess=false;
     this.showError=true;
   }
   console.log("login works");
@@ -40,7 +38,6 @@ this.basicAuthService.handleBasicAuthLogin(this.username,this.password).subscrib
     this.router.navigate(['welcome',this.username]);  
   },
   error=>{
-    this.showSuccess=false;
     this.showError=true;  
   }
   )
@@ -53,7 +50,6 @@ jwtAuthenticate(){
       this.router.navigate(['welcome',this.username]);  
     },
     error=>{
-      this.showSuccess=false;
       this.showError=true;  
     }
     )
